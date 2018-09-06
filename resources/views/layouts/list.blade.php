@@ -87,7 +87,11 @@
             $page_max = ceil($count / 20) - 1;
             $last_page_count = $count - $page_max * 20;
         @endphp
-        @if($page > 0 && isset($asobikatas))
+        @if(isset($aso_repos))
+            @if($page > 1)
+                <a class="prev" href="{{ Request::url()}}?page={{$page - 1}}">＜前の20件</a>
+            @endif
+        @elseif($page > 0)
             <a class="prev" href="{{ Request::url()}}?page={{$page - 1}}">＜前の20件</a>
         @endif
         @if($page < $page_max - 1)

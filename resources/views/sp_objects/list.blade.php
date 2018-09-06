@@ -4,9 +4,7 @@
     }
 @endphp
 
-@if(isset($aso_repos))
-    @include('objects.aso_repo_index')
-@elseif(isset($asobikatas))
+@if(isset($asobikatas))
     @foreach($asobikatas as $asobikata)
         <!--　人気内容 -->
         <a class="list_item clearfix" href="/article/{{$asobikata->id}}">
@@ -19,5 +17,5 @@
             <p>{{$asobikata->outline}}</p>
         </a>
     @endforeach
+    <div style="height: 10%"></div>
 @endif
-<div style="height: 10%"></div>
