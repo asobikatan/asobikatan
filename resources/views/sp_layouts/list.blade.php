@@ -3,6 +3,10 @@
     @section('title')
         {{$category}}| 日常をちょっと楽しく。
     @endsection
+@elseif(isset($aso_repos))
+    @section('title')
+        【遊んでみた】{{$asobikata->name}}【あそレポ】| 日常をちょっと楽しく。
+    @endsection
 @elseif(isset($user_name))
     @section('title')
         {{$user_name}}さんのあそび| 日常をちょっと楽しく。
@@ -21,6 +25,8 @@
     @if(isset($category))
         <a class="link" href="/category/list">他のカテゴリへ</a>
         <h3>{{$category}}</h3>
+    @elseif(isset($aso_repos))
+        <a href="/">TOP</a> ＞　<a href="/user/{{$login_id}}/">{{$user_name}}さんのあそび</a>　＞　<a href="/article/{{$asobikata->id}}/">{{$asobikata->name}}</a>　＞　あそレポ一覧
     @elseif(isset($user_name))
         <h3>{{$user_name}}さん</h3>
         <div class="item" style="margin-bottom: 0;">
