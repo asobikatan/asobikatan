@@ -60,6 +60,7 @@
             padding: 0 2%;
             width: 96%;
             border-bottom: 1px solid gray;
+            font-size: 1.17em;
         }
 
         h3, h2, h4, .list_item p{
