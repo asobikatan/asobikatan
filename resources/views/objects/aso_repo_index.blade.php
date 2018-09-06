@@ -20,7 +20,8 @@
         @endforeach
     </ul>
     @if($count > 5)
-        @if($page == null || $page < 1)
+        @if(isset($page) && $page > 0)
+        @else
             <a href="{{ Request::url()}}?page=1"><img src="/img/detail/more_aso_repo_btn.png" alt="あそレポを更に表示する" style="width: 100%;"></a>
         @endif
     @endif
