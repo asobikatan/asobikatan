@@ -62,7 +62,7 @@
                 <div class="error">再度指定してください。</div>
                 <div class="error">{{$errors->first("main_pic")}}</div>
             @endif
-            <input type="file" accept="image/*" name="main_pic"><p style="padding: 5px;">
+            <input type="file" accept="image/png, image/jpeg, image/gif" name="main_pic"><p style="padding: 5px;">
             @if(!isset($aso_repo))
                 ※必須項目　
             @endif

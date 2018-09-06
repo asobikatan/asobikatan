@@ -1,5 +1,5 @@
 <h2>このあそびカタの「あそレポ」</h2>
-@if(count($aso_repos) > 0)
+@if($count > 0)
     <ul class="flow">
         @foreach($aso_repos as $aso_repo)
             <a href="/aso-repo/{{$aso_repo->id}}" style="text-decoration: none;">
@@ -19,6 +19,11 @@
             </a>
         @endforeach
     </ul>
+    @if($count > 5)
+        @if($page == null || $page < 1)
+            <a href="{{ Request::url()}}?page=1"><img src="/img/detail/more_aso_repo_btn.png" alt="あそレポを更に表示する" style="width: 100%;"></a>
+        @endif
+    @endif
 @else
     <p>まだ「あそレポ」は投稿されていないようです。</p>
 @endif

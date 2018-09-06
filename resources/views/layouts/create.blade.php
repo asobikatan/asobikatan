@@ -67,7 +67,7 @@
                                         @if($errors->has("pics_$i"))
                                             <div class="error">{{$errors->first("pics_$i")}}
                                         @endif
-                                    <input type="file" accept="image/*" name="pics_{{$i}}" value="{{old('pics_$i')}}">※手順に補足画像を添付する場合は選択してください(10MByteまで)</dd>
+                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="pics_{{$i}}" value="{{old('pics_$i')}}">※手順に補足画像を添付する場合は選択してください(10MByteまで)</dd>
                                 </dl>
                         @endfor
                     </div>
@@ -110,7 +110,7 @@
                                     <div class="lap" id="lap">
                                         <a href="#openlocation" class="overlap">X</a>
                                         <div class="innerWindow">
-                                            <input type="file" accept="image/*" name="pics_0" value="{{old('pics_0')}}"><br>
+                                            <input type="file" accept="image/png, image/jpeg, image/gif" name="pics_0" value="{{old('pics_0')}}"><br>
                                             <script type="text/javascript">
                                                 function man_pic(){
                                                     document.getElementById("item_0").checked = true;

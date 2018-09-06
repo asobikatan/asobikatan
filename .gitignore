@@ -11,4 +11,7 @@ npm-debug.log
 yarn-error.log
 .env
 /config/database.php
-/public/img/
+/public/img/aso_repo/
+/public/img/asobi/
+/public/img/user/
+*.log

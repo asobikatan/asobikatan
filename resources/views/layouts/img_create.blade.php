@@ -56,7 +56,7 @@
         {{csrf_field()}}
         <input type="hidden" name="user_id" value="{{$session_user->id}}">
         <input type="hidden" name="aid" value="{{$aid}}">
-        <input type="file" name="pics[]" multiple="multiple" accept="image/*">
+        <input type="file" name="pics[]" multiple="multiple" accept="image/png, image/jpeg, image/gif">
         <p style="padding: 5px;">※20枚まで
         ※合計10MByteまで</p>
 

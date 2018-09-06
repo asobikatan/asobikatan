@@ -7,6 +7,10 @@
     @section('title')
         {{$user_name}}さんのあそび| 日常をちょっと楽しく。
     @endsection
+@elseif(isset($aso_repos))
+    @section('title')
+        【遊んでみた】{{$asobikata->name}}【あそレポ】| 日常をちょっと楽しく。
+    @endsection
 @else
     @section('title')
         あそびの一覧| 日常をちょっと楽しく。

@@ -89,7 +89,7 @@
                                     @else
                                         ※上書きする場合は指定（10MByteまで）
                                     @endif
-                                <input type="file" accept="image/*" name="pics_{{$i}}" value="{{old('pics_$i')}}"></dd>
+                                <input type="file" accept="image/png, image/jpeg, image/gif" name="pics_{{$i}}" value="{{old('pics_$i')}}"></dd>
                             </dl>
                         @endfor
                     </div>
@@ -140,7 +140,7 @@
                                         <div class="lap" id="lap">
                                             <a href="#openlocation" class="overlap">X</a>
                                             <div class="innerWindow">
-                                                <input type="file" accept="image/*" name="pics_0"><br>
+                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="pics_0"><br>
                                                 <script type="text/javascript">
                                                     function man_pic(){
                                                         document.getElementById("item_0").checked = true;
@@ -163,7 +163,7 @@
                                     document.getElementById("item_0").checked = true;
                                 }
                             </script>
-                            <input type="file" accept="image/*" name="pics_0" onClick="override_man_pic()">
+                            <input type="file" accept="image/png, image/jpeg, image/gif" name="pics_0" onClick="override_man_pic()">
                             <dd><input type="radio" name="main_pic" id="item_31" value="31" {{$pics_checked[31]}}>
                                 <label for="item_31"><img onerror="this.src='/img/noimg.jpg';" src="/img/asobi/{{$asobikata->id}}/main_200x200.jpg"></label>
                             </dd>

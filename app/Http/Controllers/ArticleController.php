@@ -26,9 +26,23 @@ class ArticleController extends Controller
 
         return $asobikatas;
     }
-    public function aso_repo($aid){
-        $aso_repos = DB::table('aso_repo')->where('asobikata_id', $aid)->where('status', 1)->get();
-        return $aso_repos;
+    public function aso_repo($aid, $page = 0){
+        if($page == 0){
+            $aso_repo_per_page = 5;
+            $offset = 0;
+        }else{
+            $aso_repo_per_page = 20;
+            $offset = ($page - 1) * $aso_repo_per_page;
+        }
+        $count = DB::select("select count(*) as count from aso_repo where asobikata_id = :aid and status = 1", ['aid' => $aid])[0]->count;
+        $aso_repos = DB::table('aso_repo')->where('asobikata_id', $aid)->where('status', 1)->orderBy('id', 'desc')->skip($offset)->take($aso_repo_per_page)->get();
+        $asobikata = DB::table('asobikatas')->where('id', $aid)->where('status', 1)->first();
+        $user = DB::table('users')->where('id', $asobikata->user_id)->first();
+        return ['aso_repos' => $aso_repos,
+            'count' => $count,
+            'asobikata' => $asobikata,
+            'user' => $user
+        ];
     }
 
     /**
@@ -271,24 +285,39 @@ class ArticleController extends Controller
         $sim_asobikatas = $asobikatas = $this->pop_get();
 
         //当該あそびカタのあそレポ
-        $aso_repos = $this->aso_repo($asobikata->id);
-
-        return view($request->ua . 'layouts.detail',
-            ['yattemitais' => $yattemitais,
-            'asobikata' => $asobikata,
-            'sim_asobikatas' => $sim_asobikatas,
-            'aso_repos' => $aso_repos,
-            'session_user' => $session_user,
-            'tSharingUrl' => $tSharingUrl,
-            'url' => $url,
-            'mode' => $mode,
-            'isAndroid' => $request->isAndroid,
-            'ua' => $request->ua . "objects.common",
-            'user_name' => $user->name,
-            'login_id' => $user->login_id,
-            'user_id' => $user->id,
-            'detail_imgs' => $detail_imgs,
-        ]);
+        if(isset($request->page)){
+            $aso_repos = $this->aso_repo($asobikata->id, $request->page);
+            return view($request->ua . 'layouts.list',
+                ['aso_repos' => $aso_repos['aso_repos'],
+                'count' => $aso_repos['count'],
+                'asobikata' => $aso_repos['asobikata'],
+                'login_id' => $aso_repos['user']->login_id,
+                'user_name' => $aso_repos['user']->name,
+                'user_id' => $aso_repos['user']->id,
+                'ua' => $request->ua . "objects.common",
+                'page' => $request->page,
+                'session_user' => $session_user,]);
+        }else{
+            $aso_repos = $this->aso_repo($asobikata->id);
+            return view($request->ua . 'layouts.detail',
+                ['yattemitais' => $yattemitais,
+                'asobikata' => $asobikata,
+                'sim_asobikatas' => $sim_asobikatas,
+                'aso_repos' => $aso_repos['aso_repos'],
+                'count' => $aso_repos['count'],
+                'session_user' => $session_user,
+                'tSharingUrl' => $tSharingUrl,
+                'url' => $url,
+                'mode' => $mode,
+                'isAndroid' => $request->isAndroid,
+                'ua' => $request->ua . "objects.common",
+                'user_name' => $user->name,
+                'login_id' => $user->login_id,
+                'user_id' => $user->id,
+                'detail_imgs' => $detail_imgs,
+            ]);
+        }
+        //user1つで済ませず、user_nameなりlogin_idなり使って汚くも見えるが、listを共通化するために仕方なく行なっている。
     }
 
     /**
