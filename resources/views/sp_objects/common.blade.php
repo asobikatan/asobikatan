@@ -218,6 +218,7 @@
             margin: 2% 0 2% 2%;
             padding: 2%;
             text-decoration: none;
+            color: #000;
         }
 
         .aso_repo img{
