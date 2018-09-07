@@ -107,11 +107,16 @@
             color: #000;
         }
 
-        a img:hover, .modal .btn:hover, label img:hover, .post_btn:hover{
+        .aso_repo:hover, a img:hover, .modal .btn:hover, label img:hover, .post_btn:hover{
             position: relative;
             top: 2px;
             left: 2px;
             cursor: pointer;
+        }
+
+        a img:hover{
+            top: 0px;
+            left: 0px;
         }
 
         .submit{
