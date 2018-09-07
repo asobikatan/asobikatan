@@ -9,6 +9,16 @@
             margin: 0;
         }
         @if($ua == 'sp_objects.common')
+            .misc-btn{
+                display: inline-block;
+                background: linear-gradient(#fff, #f0f0f0);
+                border-radius: 10px;
+                box-shadow:0px 0px 3px 3px #cfcfcf;
+                text-decoration: none;
+                color: black;
+                text-align: center;
+                vertical-align: middle;
+            }
             input, button {
                 width: 86%;
                 margin: 5%;
@@ -47,10 +57,10 @@
         @if($ua == 'sp_objects.common')
             <br>
         @endif
-        <input type="submit" alt="送信する" value="->画像を投稿->">
+        <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->">
         @isset($path)
             <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">' readonly>
-            <button onclick="copyToClipboard()">タグをコピー</button>
+            <button class="misc-btn" onclick="copyToClipboard()">タグをコピー</button>
         @else
             <input id="copyTarget" type="text" placeholder="ここにタグが出ます" readonly>
         @endisset
