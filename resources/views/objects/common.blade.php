@@ -525,6 +525,24 @@
             width: 100%;
         }
 
+        .aso_repo{
+            width: 178px;
+            height: 415px;
+            display: block;
+            border: solid 1px #f2f2f2;
+            background: #fff;
+            box-shadow: 0 0 8px grey;
+            float: left;
+            margin-right: 50px;
+            padding: 10px;
+        }
+
+        .aso_repo img{
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+        }
+
         .grad-item {
           position: relative;
           overflow: hidden;
