@@ -31,11 +31,11 @@ class ArticleController extends Controller
             $aso_repo_per_page = 6;
             $offset = 0;
         }else{
-            $aso_repo_per_page = 20;
+            $aso_repo_per_page = 18;
             $offset = ($page - 1) * $aso_repo_per_page;
         }
         $count = DB::select("select count(*) as count from aso_repo where asobikata_id = :aid and status = 1", ['aid' => $aid])[0]->count;
-        $aso_repos = DB::table('aso_repo')->where('asobikata_id', $aid)->where('status', 1)->orderBy('id', 'desc')->skip($offset)->take($aso_repo_per_page)->get();
+        $aso_repos = DB::table('aso_repo')->join('users', 'aso_repo.user_id', '=', 'users.id')->select('users.id as user_id', 'users.name as user_name', 'users.login_id as login_id', 'aso_repo.*')->where('aso_repo.asobikata_id', $aid)->where('aso_repo.status', 1)->orderBy('aso_repo.id', 'desc')->skip($offset)->take($aso_repo_per_page)->get();
         $pattern = ['/<img(.*)">/', '/<a(.*)">/', '/<\/a>/', '/<strong>/', '/<\/strong>/', '/<strike>/', '/<\/strike>/', '/<p>/', '/<\/p>/'];
         foreach($aso_repos as $aso_repo){
             $aso_repo->content = preg_replace($pattern, '', $aso_repo->content);

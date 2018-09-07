@@ -11,7 +11,11 @@
 </div>
 
 <div class="misc">
-    スマートフォン版｜<a href="{{Request::url()}}?ua=ja">PC版</a>
+    @if(strpos(url()->full(), '?') === false)
+        スマートフォン版｜<a href="{{Request::url()}}?uao=ja">PC版</a>
+    @else
+        スマートフォン版｜<a href="{{Request::url()}}&uao=ja">PC版</a>
+    @endif
 </div>
 <div class="misc">
     @if(Request::path() != "/")

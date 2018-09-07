@@ -532,13 +532,13 @@
 
         .aso_repo{
             width: 178px;
-            height: 415px;
+            height: 380px;
             display: block;
             border: solid 1px #f2f2f2;
             background: #fff;
             box-shadow: 0 0 8px grey;
             float: left;
-            margin-right: 50px;
+            margin: 0 50px 30px 0;
             padding: 10px;
         }
 
@@ -732,7 +732,11 @@
                     <a href="/kiyaku">利用規約</a>｜
                     <a href="/kojin">個人情報保護方針</a>｜
                     <a href="mailto:info@asobikatan.jp">お問合せ</a></br></br>
-                    <a href="{{Request::url()}}?ua=sp">スマートフォン版</a>｜PC版
+                    @if(strpos(url()->full(), '?') === false)
+                        <a href="{{url()->full()}}?uao=sp">スマートフォン版</a>｜PC版
+                    @else
+                        <a href="{{url()->full()}}&uao=sp">スマートフォン版</a>｜PC版
+                    @endif
             </div>
         </div>
         <div class="copyright">

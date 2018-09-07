@@ -55,26 +55,23 @@ class AsoRepoController extends Controller
             }
             $i = max($file_names);
         }
-        $j = 0;
-        foreach($_FILES['pics']['tmp_name'] as $pic){
+        if(isset($_FILES['pics']['tmp_name'])){
             $i++;
-            $image = \Image::make(file_get_contents($pic));
+            $image = \Image::make(file_get_contents($_FILES['pics']['tmp_name']));
             $image->resize(700, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $image->save(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg');
             if(file_exists(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg')){
-                $paths[] = '/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg';
+                $path = '/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg';
             }else{
-                $pic_errors[] = $_FILES['pics']['name'][$j++];
+                $param['pic_errors'] = true;
             }
-
+        }else{
+            $param['pic_errors'] = true;
         }
-        if(isset($paths)){
-            $param['paths'] = $paths;
-        }
-        if(isset($pic_errors)){
-            $param['pic_errors'] = $pic_errors;
+        if(isset($path)){
+            $param['path'] = $path;
         }
         return $this->is_logged_in('layouts.img_create', '/aso-repo/img-create/?aid=' . $request->aid, $request, $param);
     }

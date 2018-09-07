@@ -208,6 +208,24 @@
             padding-top: 4px;
         }
 
+        .aso_repo{
+            width: 42%;
+            display: block;
+            border: solid 1px #f2f2f2;
+            background: #fff;
+            box-shadow: 0 0 3px grey;
+            float: left;
+            margin: 2% 0 2% 2%;
+            padding: 2%;
+            text-decoration: none;
+        }
+
+        .aso_repo img{
+            width: 100%;
+            height: 128px;
+            object-fit: contain;
+        }
+
         .lap{
             visibility: collapse;
         }

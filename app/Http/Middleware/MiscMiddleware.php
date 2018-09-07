@@ -17,23 +17,23 @@ class MiscMiddleware
     {
         $request->merge(['isAndroid' => false]);
         $ua = $_SERVER['HTTP_USER_AGENT'];
-        if( (strpos($ua,'iPhone') !== false) || (strpos($ua,'iPod') !== false) || (strpos($ua,'iPad') !== false)) {
+        if( (strpos($ua,'iPhone') !== false) || (strpos($ua,'iPod') !== false)) {
             $ua_override = 'sp';   //  スマホ版テンプレを利用
         }elseif(strpos($ua,'Android') !== false){
             $ua_override = 'sp';   //  スマホ版テンプレを利用
             $request->isAndroid = true;
         }else{
-            $ua_override = 'jp';   // PC版テンプレを利用
+            $ua_override = 'ja';   // PC版テンプレを利用
         }
 
-        if(isset($request->ua)){
-            session(['session_ua' => $request->ua]);
-            if($request->ua == 'reset'){
-                session(['session_ua' => '']);
+        if(isset($request->uao)){
+            session(['session_uao' => $request->uao]);
+            if($request->uao == 'reset'){
+                session(['session_uao' => '']);
             }
         }
-        if(strlen(session('session_ua')) > 0){
-            $ua_override = session('session_ua');
+        if(strlen(session('session_uao')) > 0){
+            $ua_override = session('session_uao');
         }
 
         if($ua_override == 'sp'){
