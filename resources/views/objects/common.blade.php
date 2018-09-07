@@ -114,7 +114,7 @@
             cursor: pointer;
         }
 
-        a img:hover{
+        .aso_repo img:hover{
             top: 0px;
             left: 0px;
         }
