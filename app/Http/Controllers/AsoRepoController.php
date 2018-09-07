@@ -38,9 +38,6 @@ class AsoRepoController extends Controller
     }
 
     public function img_store(Request $request){
-        if(!isset($request->aid)){
-            //エラーページへ
-        }
         $validate_rule = [
             'pics' => 'required',
         ];
@@ -75,8 +72,6 @@ class AsoRepoController extends Controller
         }
         if(isset($paths)){
             $param['paths'] = $paths;
-        }else{
-            //エラー画面
         }
         if(isset($pic_errors)){
             $param['pic_errors'] = $pic_errors;
@@ -90,11 +85,11 @@ class AsoRepoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+/*    public function index()
     {
         //
     }
-
+*/
     /**
      * Show the form for creating a new resource.
      *
@@ -253,11 +248,11 @@ class AsoRepoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+/*    public function update(Request $request, $id)
     {
         //storeを流用
     }
-
+*/
     /**
      * Remove the specified resource from storage.
      *

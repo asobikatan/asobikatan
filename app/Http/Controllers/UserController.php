@@ -12,33 +12,33 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+/*    public function index()
     {
         //登録しているユーザー一覧は実装なし
     }
-
+*/
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+/*    public function create()
     {
         //登録はSNS連携のみなのでcreateは実装なし
     }
-
+*/
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
         //twittercallbackでユーザー情報は登録するので出番なし
 
     }
-
+*/
     /**
      * Display the specified resource.
      *
@@ -82,11 +82,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+/*    public function edit($id)
     {
         //ユーザー情報の編集フォーム
     }
-
+*/
     /**
      * Update the specified resource in storage.
      *
@@ -94,19 +94,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+/*    public function update(Request $request, $id)
     {
         //ユーザー情報の更新
     }
-
+*/
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+/*    public function destroy($id)
     {
         //ユーザー登録抹消は不可
-    }
+    }*/
 }

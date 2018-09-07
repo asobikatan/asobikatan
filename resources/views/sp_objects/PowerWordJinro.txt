@@ -1,0 +1,5 @@
+    @if($isAndroid == true)
+        <a href="/toPowerWordJinroPlay.html"><img src="/img/PWJbanner.png" width="100%"></a>
+    @else
+        <a href="/toPowerWordJinroApp.html"><img src="/img/PWJbanner.png" width="100%"></a>
+    @endif

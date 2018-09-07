@@ -116,12 +116,7 @@
 
     <h3>盛り上がりポイント！！</h3>
     <div class="clearfix item">{!!nl2br($asobikata->moripoint)!!}</div>
-    @if($isAndroid == true)
-        <a href="/toPowerWordJinroPlay.html"><img src="/img/PWJbanner.png" width="100%"></a>
-    @else
-        <a href="/toPowerWordJinroApp.html"><img src="/img/PWJbanner.png" width="100%"></a>
-    @endif
-    
+
     @include('objects.aso_repo_index')
 
     <h3>人気のあそびカタ。</h3>
