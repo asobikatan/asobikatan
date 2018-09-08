@@ -45,7 +45,7 @@ Route::get('/yattemitai', 'MiscController@yattemitai');
 //ひどいいね
 Route::get('/hidoiine', 'MiscController@hidoiine');
 //phpinfo();表示
-Route::get('/phpinfo', 'MiscController@phpinfo');
+//Route::get('/phpinfo', 'MiscController@phpinfo');
 
 //以下、フッターにあるリンク集
 Route::get('/about', 'AboutController@about')->middleware(MiscMiddleware::class);
