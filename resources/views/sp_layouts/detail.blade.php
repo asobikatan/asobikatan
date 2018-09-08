@@ -15,7 +15,7 @@
            <div align="center" class="modal-wrap">
               <label for="modal-trigger" class="close">&#10006;</label>
               @if($mode == 'org')
-                  <a href="{!!$tSharingUrl!!}"><img onerror="this.src='/img/noimg.jpg';" src="/img/Tweet.png" width=100% alt="Twitterでシェアする"></a>
+                  <a href="{!!$tSharingUrl!!}"><img onerror="this.src='/img/noimg.jpg';" src="/img/tweet.png" width=100% alt="Twitterでシェアする"></a>
                   <div style="float: right; padding: 2px; width: 100%;" class="fb-share-button" data-href="{!!$url!!}" data-layout="button_count" data-mobile-iframe="true"></div>
               @elseif($mode == 'restored')
                   <p>復元に成功しました</p>
