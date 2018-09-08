@@ -692,7 +692,7 @@
             <li><a target=”_blank” href="https://www.facebook.com/asobikatan"><img src="/img/social_icon02.png"></a></li>
             <li><a target=”_blank” href="https://twitter.com/asobikatan"><img src="/img/social_icon01.png"></a></li>
         </ul>
-        <form action="http://www.google.com/search" method="get">
+        <form action="https://www.google.com/search" method="get">
             <input class="box" type="text" name="q" placeholder="あそびカタン内を検索">
             <input type="hidden" name="hl" value="ja">
             <input type="hidden" name="hq" value="inurl:asobikatan.jp">

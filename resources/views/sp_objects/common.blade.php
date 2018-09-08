@@ -349,7 +349,7 @@
                 <div class="lap" id="lap">
                     <a href="#openlocation" class="overlap">X</a>
                     <div class="innerWindow clearfix">
-                        <form action="http://www.google.com/search" method="get">
+                        <form action="https://www.google.com/search" method="get">
                             <input style="width: 60%; margin-top: 13%; line-height: 100%; border: 1px gray solid; " class="box" type="text" name="q" placeholder="あそびカタン内を検索">
                             <input type="hidden" name="hl" value="ja">
                             <input type="hidden" name="hq" value="inurl:asobikatan.jp">
