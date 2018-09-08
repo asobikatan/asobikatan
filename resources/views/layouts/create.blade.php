@@ -91,7 +91,7 @@
                                 $pics_checked[$i] = '';
                             }
                             $rand = rand(0,29);
-                            if(old('main_pic') !== null){
+                            if(old('main_pic') !== null && old('main_pic') > 0){
                                 $pics_checked[old('main_pic')] = 'checked="checked"';
                                 $rand = old('main_pic') - 1;
                             }
