@@ -1,6 +1,7 @@
 @if(!isset($page) || $page == 0)
     <h2>このあそびカタの「あそレポ」</h2>
 @endif
+<div>
 @if($count > 0)
     <ul class="clearfix">
         @foreach($aso_repos as $aso_repo)
@@ -56,3 +57,4 @@
 @endif
 <p>「{{$asobikata->name}}」の感想を「あそレポ」に投稿しよう！</p>
 <a style="margin-bottom: 30px;" href="/aso-repo/create?aid={{$asobikata->id}}"><img src="/img/form/post3_btn.png" alt="あそレポに投稿する" style="width: 100%;"></a>
+</div>

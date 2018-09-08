@@ -38,9 +38,9 @@
             @endif
             <iframe src="/yattemitai?id={{$asobikata->id}}&mode=ydisp_list" name="yattemitai" width="106px" height="106px" frameborder="0" allowtransparency='true'　style="margin: 0;"></iframe>
             <ul class="share-buttons">
+                <li class="others"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-counter" data-hatena-bookmark-height="20" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></li>
                 <li style="margin-bottom: 8px;"><div class="fb-share-button" data-href="{{$url}}" data-layout="button_count" data-mobile-iframe="true"></div></li>
                 <li class="others"><a href="http://twitter.com/share" class="twitter-share-button" data-url="{{$url}}"　data-text="この遊びおもしろい！" data-hashtags="あそびカタン" data-count="horizontal" data-lang="ja">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
-                <li class="others"><a href="http://b.hatena.ne.jp/entry/{{$url}}" class="hatena-bookmark-button" data-hatena-bookmark-title="{{$asobikata->name}}| あそびカタン" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img onerror="this.src='/img/noimg.jpg';" src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></li>
                 <li class="others">
                     <iframe src="/hidoiine?id={{$asobikata->id}}&mode=hdisp" name="hidoiine" width="100%" height="29" frameborder="0" style="margin: 0;"></iframe>
                 </li>
