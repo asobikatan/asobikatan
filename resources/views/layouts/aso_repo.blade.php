@@ -39,6 +39,8 @@
                 </form></li>
             </ul>
         @endif
+    @else
+        <a class="link" href="/article/{{$asobikata->id}}">{{$asobikata->name}}へ</a>
     @endif
     <h2>【あそレポ】〜{{$user_name}}さん編〜</h2>
 
