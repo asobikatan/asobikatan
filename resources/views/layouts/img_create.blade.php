@@ -88,23 +88,22 @@
             <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->">
             @isset($path)
                 <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">'>
-                <button class="misc-btn" onclick="copyToClipboard()">タグをコピー</button>
+                <button class="misc-btn" id="copyButton">タグをコピー</button>
             @else
-                <input id="copyTarget" type="text" placeholder="ここにタグが出ます" readonly>
+                <input id="copyTarget" type="text" placeholder="ここにタグが出ます">
             @endisset
             ※10MByteまで
         </form>
         <script>
-            function copyToClipboard() {
-                // コピー対象をJavaScript上で変数として定義する
-                var copyTarget = document.getElementById("copyTarget");
-                // コピー対象のテキストを選択する
-                copyTarget.select();
-                // 選択しているテキストをクリップボードにコピーする
-                document.execCommand("Copy");
-                // コピーをお知らせする
+            var button = document.getElementById('copyButton');
+            button.addEventListener('click', function(){
+                var copyTarget = document.getElementById('copyTarget');
+                var range = document.createRange();
+                range.selectNode(copyTarget);
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
                 alert("コピーできました！ : " + copyTarget.value);
-            }
+            });
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script>
@@ -116,8 +115,8 @@
         });
 
         $(window).load(function () { //全ての読み込みが完了したら実行
-          $('#loader-bg').delay(1200).fadeOut(800);
-          $('#loader').delay(1000).fadeOut(300);
+          $('#loader-bg').delay(800).fadeOut(800);
+          $('#loader').delay(600).fadeOut(300);
           $('#wrap').css('display', 'block');
         });
 
