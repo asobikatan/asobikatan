@@ -12,7 +12,7 @@
           <input id="modal-trigger" class="checkbox" type="checkbox" checked="checked">
           <div class="modal-overlay">
            <label for="modal-trigger" class="o-close"></label>
-           <div align="center" class="modal-wrap">
+           <div align="center" class="modal-wrap" style="margin: 0 auto;">
               <label for="modal-trigger" class="close">&#10006;</label>
               @if($mode == 'org')
                   <a href="{!!$tSharingUrl!!}"><img src="/img/Tweet.png" width=100% alt="Twitterでシェアする"></a>
