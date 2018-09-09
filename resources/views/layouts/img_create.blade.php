@@ -59,7 +59,7 @@
         @endif
         <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->">
         @isset($path)
-            <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">' readonly>
+            <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">'>
             <button class="misc-btn" onclick="copyToClipboard()">タグをコピー</button>
         @else
             <input id="copyTarget" type="text" placeholder="ここにタグが出ます" readonly>
