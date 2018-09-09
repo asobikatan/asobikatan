@@ -50,70 +50,14 @@
         #loader {
           display: none;
           position: fixed;
-          width: 100%;
-          height: 100%;
-          margin-top: -100px;
-          margin-left: -100px;
+          background-color: #fff;
+          width: 50%;
+          height: 50%;
+          top: 25%;
+          left: 25%;
           text-align: center;
           z-index: 2;
-        }
-
-        .loading,
-        .loading:before,
-        .loading:after {
-          border-radius: 50%;
-          width: 2.5em;
-          height: 2.5em;
-          -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-          -webkit-animation: load7 1.8s infinite ease-in-out;
-          animation: load7 1.8s infinite ease-in-out;
-        }
-        .loading {
-          color: rgb(179, 201, 106);
-          font-size: 10px;
-          margin: 0 auto;
-          position: relative;
-          text-indent: -9999em;
-          -webkit-transform: translateZ(0);
-          -ms-transform: translateZ(0);
-          transform: translateZ(0);
-          -webkit-animation-delay: -0.16s;
-          animation-delay: -0.16s;
-        }
-        .loading:before,
-        .loading:after {
-          content: '';
-          position: absolute;
-          top: 0;
-        }
-        .loading:before {
-          left: -3.5em;
-          -webkit-animation-delay: -0.32s;
-          animation-delay: -0.32s;
-        }
-        .loading:after {
-          left: 3.5em;
-        }
-        @@-webkit-keyframes load7 {
-          0%,
-          80%,
-          100% {
-            box-shadow: 0 2.5em 0 -1.3em;
-          }
-          40% {
-            box-shadow: 0 2.5em 0 0;
-          }
-        }
-        @@keyframes load7 {
-          0%,
-          80%,
-          100% {
-            box-shadow: 0 2.5em 0 -1.3em;
-          }
-          40% {
-            box-shadow: 0 2.5em 0 0;
-          }
+          color: #000;
         }
     </style>
 </head>
@@ -121,9 +65,7 @@
 <body>
     <div id="loader-bg">
         <div id="loader">
-            <div class="loading">
-                Loading...
-            </div>
+            読み込み中です……
         </div>
     </div>
     <div id="wrap">
@@ -174,8 +116,8 @@
         });
 
         $(window).load(function () { //全ての読み込みが完了したら実行
-          $('#loader-bg').delay(900).fadeOut(800);
-          $('#loader').delay(600).fadeOut(300);
+          $('#loader-bg').delay(1200).fadeOut(800);
+          $('#loader').delay(1000).fadeOut(300);
           $('#wrap').css('display', 'block');
         });
 
