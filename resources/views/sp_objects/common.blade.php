@@ -274,6 +274,10 @@
             position: relative;
         }
 
+        .modal{
+            padding: 0;
+        }
+
         /*　ボタン 未選択時の背景指定　*/
         input[type="radio"] + label{
             width: 29%;
