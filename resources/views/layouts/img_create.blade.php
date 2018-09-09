@@ -4,8 +4,12 @@
     <!-- 牛島一樹(2674je@gmail.com)が作りました -->
     <meta charset="utf-8">
     <style>
-        body{
+        body:after{
+        	content: "";
+        	clear: both;
+        	display: block;
             width: 100%;
+            height: 50px;
             margin: 0;
         }
         @if($ua == 'sp_objects.common')
@@ -118,17 +122,19 @@
         {{csrf_field()}}
         <input type="hidden" name="user_id" value="{{$session_user->id}}">
         <input type="hidden" name="aid" value="{{$aid}}">
-        <input type="file" name="pics" accept="image/png, image/jpeg, image/gif">
         @if($ua == 'sp_objects.common')
+            <input type="file" name="pics" accept="image/png, image/jpeg, image/gif">
             <br>
+        @else
+            <input type="file" style="width: 200px;" name="pics" accept="image/png, image/jpeg, image/gif">
         @endif
         <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->" onClick='disp_loading();'>
-        @isset($path)
+        @if(isset($path))
             <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">'>
             <button class="misc-btn" id="copyButton">タグをコピー</button>
         @else
             <input id="copyTarget" type="text" placeholder="ここにタグが出ます">
-        @endisset
+        @endif
         ※10MByteまで
     </form>
     <script>

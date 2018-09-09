@@ -82,7 +82,7 @@
                     class="item"
                     scrolling="no"
                     frameborder="1"></iframe>
-                <p style="padding: 5px;">imgタグ、aタグ、strongタグ、strikeタグ、pタグがお使いになれます。</p>
+                <p style="margin: 5px;">imgタグ、aタグ、strongタグ、strikeタグ、pタグがお使いになれます。</p>
                 @if($errors->has("content"))
                     <div class="error">{{$errors->first("content")}}</div>
                 @endif
