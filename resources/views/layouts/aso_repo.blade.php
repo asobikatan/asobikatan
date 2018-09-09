@@ -82,8 +82,10 @@
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     @endif
-    <p>「{{$asobikata->name}}」で遊んだことがありますか？</p>
-    <a href="/aso-repo/create?aid={{$asobikata->id}}"><img src="/img/detail/post_btn.png" alt="あそレポを投稿する" style="width: 100%;"></a>
+    <div>
+        <p>「{{$asobikata->name}}」の感想を「あそレポ」に投稿しよう！</p>
+        <a style="margin-bottom: 30px;" href="/aso-repo/create?aid={{$asobikata->id}}"><img src="/img/form/post3_btn.png" alt="あそレポに投稿する" style="width: 100%;"></a>
+    </div>
 
     <script type="text/javascript">
         function adjust_frame_css(F){
