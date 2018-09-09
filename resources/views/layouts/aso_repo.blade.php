@@ -8,7 +8,7 @@
 <!--  SNS共有ここから　-->
     @if($mode == 'org' || $mode == 'restored')
         <link rel="stylesheet" href="/css/modai.css">
-        <div class="modal">
+        <div class="modal" style="padding: 0;">
           <input id="modal-trigger" class="checkbox" type="checkbox" checked="checked">
           <div class="modal-overlay">
            <label for="modal-trigger" class="o-close"></label>
@@ -16,7 +16,7 @@
               <label for="modal-trigger" class="close">&#10006;</label>
               @if($mode == 'org')
                   <a href="{!!$tSharingUrl!!}"><img src="/img/Tweet.png" width=100% alt="Twitterでシェアする"></a>
-                  <div style="float: right; padding: 2px;" class="fb-share-button" data-href="{!!$url!!}" data-layout="button_count" data-mobile-iframe="true"></div><div style="float: right;">または：</div>
+                  <div style="float: right; padding: 2px; width: 20%;" class="fb-share-button" data-href="{!!$url!!}" data-layout="button_count" data-mobile-iframe="true"></div><span style="float: right; padding: 4px;">または：</span>
               @elseif($mode == 'restored')
                   <p>復元に成功しました</p>
               @endif
