@@ -25,7 +25,7 @@
                 <div class="modal-overlay">
                     <div align="center" class="modal-wrap">
                         <div class="border_box">
-                            <div class="border_body">
+                            <div class="clearfix border_body">
                                 @if($ua == 'objects.common')
                                     <img class="floatLeft" src="/img/form/main01.png">
                                 @endif
@@ -76,7 +76,7 @@
                 <iframe
                     id="content"
                     onLoad="adjust_frame_css(this.id)"
-                    src="/aso-repo/img-create?aid={{$aid}}&ua={{$ua}}"
+                    src="/aso-repo/img-create?ua={{$ua}}"
                     name="aso_repo_content"
                     style="border: 0; height: 100px; margin: 0;"
                     class="item"

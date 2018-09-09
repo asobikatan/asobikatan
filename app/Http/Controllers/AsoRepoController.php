@@ -42,36 +42,23 @@ class AsoRepoController extends Controller
             'pics' => 'required',
         ];
         $this->validate($request, $validate_rule);
-        if (!file_exists(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/0_700.jpg')) {
-            $i = 0;
-            if(!file_exists(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/')){
-                mkdir(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/', 0777, true);
-            }
-        }else{
-            $file_names = scandir(public_path() . '/img/asobi/' . $request->aid . '/aso_repo/', 1);
-            $j = 0;
-            foreach($file_names as $file_name){
-                $file_names[$j++] = substr($file_name, 0, -8);
-            }
-            $i = max($file_names);
+        $file_name = session('session_user_id') . '_' . date('YmdHisT') . '_700.jpg';
+        if(!file_exists(public_path() .'/img/aso_repo/')){
+            mkdir(public_path() .'/img/aso_repo/', 0777, true);
         }
         if(isset($_FILES['pics']['tmp_name'])){
-            $i++;
             $image = \Image::make(file_get_contents($_FILES['pics']['tmp_name']));
             $image->resize(700, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $image->save(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg');
-            if(file_exists(public_path() .'/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg')){
-                $path = '/img/asobi/'. $request->aid . '/aso_repo/'. $i .'_700.jpg';
+            $image->save(public_path() .'/img/aso_repo/'. $file_name);
+            if(file_exists(public_path() .'/img/aso_repo/'. $file_name)){
+                $param['path'] = '/img/aso_repo/'. $file_name;
             }else{
                 $param['pic_errors'] = true;
             }
         }else{
             $param['pic_errors'] = true;
-        }
-        if(isset($path)){
-            $param['path'] = $path;
         }
         return $this->is_logged_in('layouts.img_create', '/aso-repo/img-create/?aid=' . $request->aid, $request, $param);
     }

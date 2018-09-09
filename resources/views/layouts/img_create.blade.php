@@ -121,7 +121,6 @@
     <form action="/aso-repo/img-create" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <input type="hidden" name="user_id" value="{{$session_user->id}}">
-        <input type="hidden" name="aid" value="{{$aid}}">
         @if($ua == 'sp_objects.common')
             <input type="file" name="pics" accept="image/png, image/jpeg, image/gif">
             <br>
@@ -131,25 +130,43 @@
         <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->" onClick='disp_loading();'>
         @if(isset($path))
             <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">'>
-            <button class="misc-btn" id="copyButton">タグをコピー</button>
+            @if($ua == 'sp_objects.common')
+                <button class="misc-btn" id="copyButton">タグをコピー</button>
+            @else
+                <button class="misc-btn" onclick="copyToClipboard()">タグをコピー</button>
+            @endif
         @else
             <input id="copyTarget" type="text" placeholder="ここにタグが出ます">
         @endif
         ※10MByteまで
     </form>
-    <script>
-        var button = document.getElementById('copyButton');
-        button.addEventListener('click', function(){
-            var copyTarget = document.getElementById('copyTarget');
-            var range = document.createRange();
-            range.selectNode(copyTarget);
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            alert("コピーできました！ : " + copyTarget.value);
-        });
-    </script>
-    <!-- 参考：https://dev.classmethod.jp/smartphone/iphone/safari-cut-copy/ -->
-
+    @if($ua == 'sp_objects.common')
+        <script>
+            var button = document.getElementById('copyButton');
+            button.addEventListener('click', function(){
+                var copyTarget = document.getElementById('copyTarget');
+                var range = document.createRange();
+                range.selectNode(copyTarget);
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                alert("コピーできました！ : " + copyTarget.value);
+            });
+        </script>
+        <!-- 参考：https://dev.classmethod.jp/smartphone/iphone/safari-cut-copy/ -->
+    @else
+        <script>
+            function copyToClipboard() {
+                // コピー対象をJavaScript上で変数として定義する
+                var copyTarget = document.getElementById("copyTarget");
+                // コピー対象のテキストを選択する
+                copyTarget.select();
+                // 選択しているテキストをクリップボードにコピーする
+                document.execCommand("Copy");
+                // コピーをお知らせする
+                alert("コピーできました！ : " + copyTarget.value);
+            }
+        </script>
+    @endif
     <script>
         function disp_loading()
         {
