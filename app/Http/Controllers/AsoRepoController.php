@@ -118,7 +118,7 @@ class AsoRepoController extends Controller
         unset($_POST['y']);
 
         //当初、エスケープ
-        $_POST['content'] = str_replace(['<a target="_blank"', '<'], ['&lt;a', '&lt;'], $_POST['content']);
+        $_POST['content'] = str_replace(['<a target="_blank"', '<', '“', '”'], ['&lt;a', '&lt;', '"', '"'], $_POST['content']);
         //復活一覧
         $escaped_tags = ['&lt;/', '&lt;a', '&lt;strong', '&lt;strike', '&lt;img', '&lt;p'];
         $valid_tags = ['</', '<a target="_blank"', '<strong', '<strike', '<img', '<p'];
