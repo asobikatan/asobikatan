@@ -21,7 +21,7 @@
     <h2>「動画」を投稿しよう！</h2>
     <div>
         <p>「あそびカタチャンネル」を使って、動画で楽しさを共有するにはこちらから。</p>
-
+        <img src='/img/channel.png' style="width: 100%;">
         <a style="margin-bottom: 30px;" href="/aso-repo/mov-create/{{$aid}}"><img src="/img/form/mov_create.png" alt="「あそびカタチャンネル」に投稿する" style="width: 100%;"></a>
     </div>
 
