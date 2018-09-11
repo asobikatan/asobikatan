@@ -15,7 +15,7 @@
                 あそレポの投稿に興味を持っていただき、</br>ありがとうございます！</br>
             @endslot
             @slot('ua')
-                {{$ua}}
+                objects.common
             @endslot
         @endcomponent
     @endif
@@ -60,7 +60,7 @@
                                 </dl>
                         @endfor
                     </div>
-                    <label class="floatRight grad-btn" for="trigger1"><img src="/img/form/plus_btn.png"></label>
+                    <label class="grad-btn" for="trigger1"><img src="/img/form/plus_btn.png"></label>
                 </div>
             </td></tr>
 
@@ -119,7 +119,7 @@
                             </dd>
                         @endfor
                     </div>
-                    <label class="floatRight grad-btn" for="trigger2">さらに表示</label>
+                    <label class="grad-btn" for="trigger2">さらに表示</label>
                 </div>
             </td></tr>
         </table>

@@ -84,7 +84,7 @@
     @endif
     <div>
         <p>「{{$asobikata->name}}」の感想を「あそレポ」に投稿しよう！</p>
-        <a style="margin-bottom: 30px;" href="/aso-repo/create?aid={{$asobikata->id}}"><img src="/img/form/post3_btn.png" alt="あそレポに投稿する" style="width: 100%;"></a>
+        <a style="margin-bottom: 30px;" href="/aso-repo/selecter/{{$asobikata->id}}"><img src="/img/form/post3_btn.png" alt="あそレポに投稿する" style="width: 100%;"></a>
     </div>
 
     <script type="text/javascript">
