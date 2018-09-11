@@ -4,11 +4,13 @@
 <div>
 @if($count > 0)
     <ul class="clearfix">
-        <a href="https://www.youtube.com/watch?v=vzoKlczYqQg" target="_blank" style="text-decoration: none;">
+        @if($asobikata->id == 210)
+        <a href="https://www.youtube.com/watch?v=gZ6b9tQIlkM" target="_blank" style="text-decoration: none;">
             <li><img style="width: 200px; float: left; margin-right: 50px;" src="/img/aso_repo_mov.png"></li></a>
+        @endif
         @foreach($aso_repos as $aso_repo)
             <a href="/aso-repo/{{$aso_repo->id}}" style="text-decoration: none;">
-                @if($loop->iteration % 3 == 2)
+                @if($loop->iteration % 3 == 0)
                     <li class="clearfix aso_repo" style="margin-right: 0;">
                 @else
                     <li class="clearfix aso_repo">

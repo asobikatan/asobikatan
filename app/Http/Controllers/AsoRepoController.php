@@ -94,9 +94,14 @@ class AsoRepoController extends Controller
         $this->validate($request, $validate_rule);
 
         $title = 'あそびカタ紹介「' . $_POST['asobikata_name'] . '」';
-        $categories[] = '（自動取得したカテゴリ）';
+        $categories[] = '（自動取得したカテゴリ1）';
+        $categories[] = '（自動取得したカテゴリ2）';
         $tags = explode(',', $request->tags);
+        $asobikata_id = $_POST['asobikata_id'];
         $_POST['content'] .= <<< EOF
+
+
+
 あそびカタン。内の解説ページはこちら！→https://asobikatan.jp/article/$asobikata_id
 
 あそびカタン。では一人でできるあそびカタも豊富に取り揃えています！
@@ -105,17 +110,22 @@ class AsoRepoController extends Controller
 
 
 EOF;
-        foreach($categories as $category){
-            $tags .= ',' . $category;
-            $_POST['content'] .= <<<EOF
+        if(true){
+            foreach($categories as $category){
+                $tags[] = $category;
+                $_POST['tags'] .= ',' . $category;
+                $_POST['content'] .= <<<EOF
 
 $category
 EOF;
+            }
         }
+
 
         unset($_POST['_token']);
         unset($_POST['x']);
         unset($_POST['y']);
+        unset($_POST['asobikata_name']);
 
         //モックだから
         $_POST['title'] = $title . '（自動生成です）';
@@ -124,6 +134,10 @@ EOF;
         dd($_POST);
 
         unset($_FILES);
+        unset($_POST['tags']);
+
+        //この段階でYoutubeへ情報送信＆DB書き込み
+
         header('Location: /path/to/youtube');
         exit();
     }
