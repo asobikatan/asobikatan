@@ -13,6 +13,17 @@
 
     @if(count($errors) > 0)
         <p class="error">入力に問題があります。再入力してください。</p>
+    @else
+        @component('objects.notice_form')
+            @slot('msg')
+                @if(!isset($aso_repo))
+                    あそレポの投稿に興味を持っていただき、</br>ありがとうございます！</br>
+                @endif
+            @endslot
+            @slot('ua')
+                {{$ua}}
+            @endslot
+        @endcomponent
     @endif
 
     <form action="/aso-repo/mov-create" method="post" enctype="multipart/form-data">

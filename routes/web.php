@@ -35,6 +35,7 @@ Route::post('/aso-repo/img-create', 'AsoRepoController@img_store')->middleware(M
 Route::get('/aso-repo/mov-create/{aid}', 'AsoRepoController@mov_create')->middleware(MiscMiddleware::class);
 Route::post('/aso-repo/mov-create', 'AsoRepoController@mov_store')->middleware(MiscMiddleware::class);
 Route::get('/aso-repo/content/{id}', 'AsoRepoController@content');
+Route::get('/aso-repo/selecter/{aid}', 'AsoRepoController@selecter_aso_repo')->middleware(MiscMiddleware::class);
 Route::resource('/aso-repo', 'AsoRepoController')->middleware(MiscMiddleware::class);
 
 //ユーザーのCRUD（新規登録・ユーザーページ・編集・削除）
