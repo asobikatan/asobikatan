@@ -15,7 +15,7 @@ class AsoRepoController extends Controller
         $session_user_id = $request->session()->get('session_user_id');
 
         //試験用強制ログイン機能
-        //$session_user_id = 263;
+        $session_user_id = 263;
 
         //これ大事。早まるな。idだけわかっても右ペーン出せんやろ。
         $session_user = DB::table('users')->where('id', $session_user_id)->first();
@@ -84,7 +84,6 @@ class AsoRepoController extends Controller
         //あそレPOST送信の受け付け
         $validate_rule = [
             'user_id' => 'required|integer',
-            'movie' => 'required|max:1000000',
         ];
 
         //編集機能実装に備えて
@@ -100,7 +99,8 @@ class AsoRepoController extends Controller
         unset($_POST['y']);
 
         //モックだから
-        $_POST['file_name'] = $_FILES['movie']['name'];
+        $_POST['title'] = $title . '（自動生成です）';
+        $_POST['file_name'] = 'hoge.mp4';
         $_POST['notice'] = 'モック動作はここまでです。このあと、youtubeに動画が投稿され、DBに必要事項が書き込まれ、当該動画ページに遷移するようにします。';
         dd($_POST);
 

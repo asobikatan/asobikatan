@@ -22,11 +22,7 @@
 
             <h2>動画を投稿しよう！</h2>
             <div>
-                @if(count($errors) > 0)
-                    <div class="error">再度指定してください。</div>
-                    <div class="error">{{$errors->first("movie")}}</div>
-                @endif
-                <input type="file" name="movie" accept="video/quicktime, video/mp4, video/x-msvideo, video/x-ms-wmv, video/MP2P, video/MP1S, video/x-flv, video/3gpp, video/webm, video/hevc"><p style="padding: 5px;">
+                <img src="/img/upload.png">
                 ※必須項目　※1GByteまで</p><br>
             </div>
 

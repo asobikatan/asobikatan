@@ -28,10 +28,10 @@ class ArticleController extends Controller
     }
     public function aso_repo($aid, $page = 0){
         if($page == 0){
-            $aso_repo_per_page = 6;
+            $aso_repo_per_page = 5;
             $offset = 0;
         }else{
-            $aso_repo_per_page = 18;
+            $aso_repo_per_page = 17;
             $offset = ($page - 1) * $aso_repo_per_page;
         }
         $count = DB::select("select count(*) as count from aso_repo where asobikata_id = :aid and status = 1", ['aid' => $aid])[0]->count;

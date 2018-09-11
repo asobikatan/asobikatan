@@ -110,7 +110,7 @@
         <h2>もしくは……</h2>
         <div>
             「{{$asobikata->name}}」の動画を「あそびカタチャンネル」に投稿しよう！<br>
-            ここにチャンネル情報、含動画サムネイル
+            <img src='/img/channel.png' style="width: 100%;">
             <a style="margin-bottom: 30px;" href="/aso-repo/mov-create/{{$asobikata->id}}"><img src="/img/form/mov_create.png" alt="「あそびカタチャンネル」に投稿する" style="width: 100%;"></a>
         </div>
 
