@@ -527,7 +527,7 @@
         }
 
         .big-text{
-            width: 100%;
+            width: 695px;
         }
 
         .aso_repo{
@@ -594,7 +594,7 @@
             opacity: 0.6;
         }
 
-        label{
+        .grad-item label{
             width: 100px;
             height: 100px;
         }
@@ -624,6 +624,9 @@
         }
         .grad-trigger {
           display: none; /*チェックボックスは常に非表示*/
+        }
+        .grad-btn {
+            float: right;
         }
         .grad-trigger:checked ~ .grad-btn {
             display: none;

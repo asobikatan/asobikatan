@@ -87,6 +87,7 @@ class AsoRepoController extends Controller
     public function mov_store(Request $request){
         //あそレPOST送信の受け付け
         $validate_rule = [
+            'title' => 'required|string',
             'user_id' => 'required|integer',
         ];
 
@@ -97,31 +98,34 @@ class AsoRepoController extends Controller
 
         $this->validate($request, $validate_rule);
 
-        $title = 'あそびカタ紹介「' . $_POST['asobikata_name'] . '」';
-        $categories[] = '（自動取得したカテゴリ1）';
-        $categories[] = '（自動取得したカテゴリ2）';
+        $_POST['tags'] .= ',' . $_POST['asobikata_name'];
+        $_POST['tags'] .= ',' . $_POST['user_name'];
+        $categories[] = '（自動取得したカテゴリ）';
+        if(true){
+            foreach($categories as $category){
+                $_POST['tags'] .= ',' . $category;
+            }
+        }
+        $_POST['tags'] .= ',あそびカタン';
+
         $tags = explode(',', $request->tags);
         $asobikata_id = $_POST['asobikata_id'];
+        $asobikata_name = $_POST['asobikata_name'];
         $_POST['content'] .= <<< EOF
 
 
 
-あそびカタン。内の解説ページはこちら！→https://asobikatan.jp/article/$asobikata_id
+「"$asobikata_name"」のあそびカタを紹介しているページはこちら！→https://asobikatan.jp/article/$asobikata_id
 
-あそびカタン。では一人でできるあそびカタも豊富に取り揃えています！
-あなたも思いついたあそびカタを投稿してみてくださいね！投稿はあそびカタン。トップページから！
-→https://asobikatan.jp/
-
+あそびカタンは、みんなのあそびカタを投稿するあそびカタ共有サイトです。
+あなたのあそびカタを投稿したり、みんなのあそびカタを見たり、あそんでみたら感想を「あそレポ」に投稿したり……色々なことができます。
+ぜひ一度見てみてくださいね！
+あそびカタンはこちらからどうぞ！→https://asobikatan.jp
 
 EOF;
         if(true){
-            foreach($categories as $category){
-                $tags[] = $category;
-                $_POST['tags'] .= ',' . $category;
-                $_POST['content'] .= <<<EOF
-
-$category
-EOF;
+            foreach($tags as $tag){
+                $_POST['content'] .= $category . '　';
             }
         }
 
@@ -130,6 +134,7 @@ EOF;
         unset($_POST['x']);
         unset($_POST['y']);
         unset($_POST['asobikata_name']);
+        unset($_POST['user_name']);
 
         //モックだから
         $_POST['title'] = $title . '（自動生成です）';
@@ -139,6 +144,7 @@ EOF;
 
         unset($_FILES);
         unset($_POST['tags']);
+        unset($_POST['title']);
 
         //この段階でYoutubeへ情報送信＆DB書き込み
 
