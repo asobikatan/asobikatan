@@ -1,7 +1,13 @@
 @extends($ua)
 
 @section('title')
-    あそレポを投稿する| 日常をちょっと楽しく。
+    @if(!isset($aso_repo))
+        あそレポを投稿する | 日常をちょっと楽しく。
+    @elseif($ua == 'sp_objects.common')
+        パソコンから操作してください | 日常をちょっと楽しく。
+    @else
+        あそレポを編集する | 日常をちょっと楽しく。
+    @endif
 @endsection
 
 @section('contents')
@@ -10,10 +16,12 @@
     @else
         @if($ua == 'objects.common')
             @if(isset($aso_repo))
-                <a href="/">TOP</a> ＞　あそレポを編集する
+                <a href="/">TOP</a> ＞　<a href="/user/{{$login_id}}/">{{$user_name}}さんのあそび</a>　＞　<a href="/article/{{$asobikata->id}}/">{{$asobikata->name}}</a> ＞　あそレポを編集する
             @else
-                <a href="/">TOP</a> ＞　あそレポを投稿する
+                <a href="/">TOP</a> ＞　<a href="/user/{{$login_id}}/">{{$user_name}}さんのあそび</a>　＞　<a href="/article/{{$asobikata->id}}/">{{$asobikata->name}}</a> ＞　あそレポを投稿する
             @endif
+        @else
+            <a class="link" href="/article/{{$asobikata->id}}">{{$asobikata->name}}へ</a>
         @endif
 
         @if(count($errors) > 0)
@@ -44,6 +52,7 @@
                 </div>
             </div>
         @endif
+
         <form action="/aso-repo" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
             <input type="hidden" name="user_id" value="{{$session_user->id}}">
@@ -76,7 +85,7 @@
                 <iframe
                     id="content"
                     onLoad="adjust_frame_css(this.id)"
-                    src="/aso-repo/img-create?ua={{$ua}}"
+                    src="/aso-repo/img-create"
                     name="aso_repo_content"
                     style="border: 0; height: 100px; margin: 0;"
                     class="item"
@@ -95,23 +104,32 @@
                     <textarea rows="30" name="content" class="big-text" placeholder="{{$placeholder}}">{!!old('content')!!}</textarea>
                 @endif
                 <input type="image" src="/img/form/post3_btn.png" alt="送信する" align="middle" class="post_btn">
-            </form>
-            <script type="text/javascript">
-                function adjust_frame_css(F){
-                    if(document.getElementById(F)) {
-                        var myF = document.getElementById(F);
-                        var myC = myF.contentWindow.document.documentElement;
-                        var myH = 100;
-                        if(document.all) {
-                            myH  = myC.scrollHeight;
-                        } else {
-                            myH = myC.offsetHeight;
-                        }
-                        myF.style.height = myH+"px";
-                    }
-                }
-            </script>
+            </div>
+        </form>
+
+        <h2>もしくは……</h2>
+        <div>
+            「{{$asobikata->name}}」の動画を「あそびカタチャンネル」に投稿しよう！<br>
+            ここにチャンネル情報、含動画サムネイル
+            <a style="margin-bottom: 30px;" href="/aso-repo/mov-create/{{$asobikata->id}}"><img src="/img/form/mov_create.png" alt="「あそびカタチャンネル」に投稿する" style="width: 100%;"></a>
         </div>
+
+
+        <script type="text/javascript">
+            function adjust_frame_css(F){
+                if(document.getElementById(F)) {
+                    var myF = document.getElementById(F);
+                    var myC = myF.contentWindow.document.documentElement;
+                    var myH = 100;
+                    if(document.all) {
+                        myH  = myC.scrollHeight;
+                    } else {
+                        myH = myC.offsetHeight;
+                    }
+                    myF.style.height = myH+"px";
+                }
+            }
+        </script>
     @endif
 @endsection
 

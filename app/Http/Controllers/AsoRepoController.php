@@ -13,15 +13,27 @@ class AsoRepoController extends Controller
         //投稿フォーム
         //あなたは誰ですか？
         $session_user_id = $request->session()->get('session_user_id');
+
+        //試験用強制ログイン機能
+        //$session_user_id = 263;
+
         //これ大事。早まるな。idだけわかっても右ペーン出せんやろ。
         $session_user = DB::table('users')->where('id', $session_user_id)->first();
 
         //ログインしていたらフォーム、していなかったらログイン画面
         if(isSet($session_user)){
-            if($mode == 'layouts.img_create' || $mode == 'layouts.aso_repo_create'){
+            //$this->create（あそレポ投稿）/$this->mov_create（あそレポ動画投稿）で、「あそびカタに戻る」を出すために取得。
+            if(isset($param['aid'])){
+                $asobikata = DB::table('asobikatas')->select('name', 'id', 'user_id')->where('id', $param['aid'])->where('status', 1)->first();
+                $param['asobikata'] = $asobikata;
+                $user = DB::table('users')->select('login_id', 'name')->where('id', $asobikata->user_id)->first();
+                $param['login_id'] = $user->login_id;
+                $param['user_name'] = $user->name;
+            }
+
+            if($mode == 'layouts.img_create' || $mode == 'layouts.aso_repo_create' || $mode == 'layouts.mov_create'){
                 $param['ua'] = $request->ua . 'objects.common';
             }
-            $param['aid'] = $request->aid;
             $param['session_user'] = $session_user;
             return view($mode, $param);
         }else{
@@ -34,12 +46,12 @@ class AsoRepoController extends Controller
     }
 
     public function img_create(Request $request){
-        return $this->is_logged_in('layouts.img_create', '/aso-repo/img-create/?aid=' . $request->aid, $request);
+        return $this->is_logged_in('layouts.img_create', '/aso-repo/img-create', $request);
     }
 
     public function img_store(Request $request){
         $validate_rule = [
-            'pics' => 'required',
+            'pics' => 'required|max:10000',
         ];
         $this->validate($request, $validate_rule);
         $file_name = session('session_user_id') . '_' . date('YmdHisT') . '_700.jpg';
@@ -64,6 +76,39 @@ class AsoRepoController extends Controller
     }
     //似た処理がArticleController@storeに存在
 
+    public function mov_create(Request $request, $aid){
+        return $this->is_logged_in('layouts.mov_create', '/aso-repo/mov-create/' . $aid, $request, ['aid' => $aid]);
+    }
+
+    public function mov_store(Request $request){
+        //あそレPOST送信の受け付け
+        $validate_rule = [
+            'user_id' => 'required|integer',
+            'movie' => 'required|max:1000000',
+        ];
+
+        //編集機能実装に備えて
+        if(true){
+            $validate_rule['asobikata_id'] = 'required|integer';
+        }
+
+        $this->validate($request, $validate_rule);
+        $tags = explode(',', $request->tags);
+
+        unset($_POST['_token']);
+        unset($_POST['x']);
+        unset($_POST['y']);
+
+        //モックだから
+        $_POST['file_name'] = $_FILES['movie']['name'];
+        $_POST['notice'] = 'モック動作はここまでです。このあと、youtubeに動画が投稿され、DBに必要事項が書き込まれ、当該動画ページに遷移するようにします。';
+        dd($_POST);
+
+        unset($_FILES);
+        header('Location: /path/to/youtube');
+        exit();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -82,7 +127,7 @@ class AsoRepoController extends Controller
     public function create(Request $request)
     {
         //あそレポ投稿受付画面
-        return $this->is_logged_in('layouts.aso_repo_create', '/aso-repo/create?aid=' . $request->aid, $request);
+        return $this->is_logged_in('layouts.aso_repo_create', '/aso-repo/create?aid=' . $request->aid, $request, ['aid' => $request->aid]);
     }
 
     /**
@@ -97,7 +142,7 @@ class AsoRepoController extends Controller
         $validate_rule = [
             'user_id' => 'required|integer',
             'content' => 'required|string',
-            'main_pic' => 'required|image',
+            'main_pic' => 'required|image|max:10000',
         ];
         if(isset($request->id)){
             //編集動作の場合、画像は任意

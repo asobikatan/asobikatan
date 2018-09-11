@@ -32,6 +32,8 @@ Route::get('/user/{login_name}/{id}.htm', function($login_name, $id){
 //あそレポのCRUD（あそレポ投稿・個別あそレポ・編集・削除）※見出しはArticleController@Show
 Route::get('/aso-repo/img-create', 'AsoRepoController@img_create')->middleware(MiscMiddleware::class);
 Route::post('/aso-repo/img-create', 'AsoRepoController@img_store')->middleware(MiscMiddleware::class);
+Route::get('/aso-repo/mov-create/{aid}', 'AsoRepoController@mov_create')->middleware(MiscMiddleware::class);
+Route::post('/aso-repo/mov-create', 'AsoRepoController@mov_store')->middleware(MiscMiddleware::class);
 Route::get('/aso-repo/content/{id}', 'AsoRepoController@content');
 Route::resource('/aso-repo', 'AsoRepoController')->middleware(MiscMiddleware::class);
 
