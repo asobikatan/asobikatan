@@ -16,7 +16,7 @@
     @else
         @if($ua == 'objects.common')
             @if(isset($aso_repo))
-                <a href="/">TOP</a> ＞　<a href="/user/{{$login_id}}/">{{$user_name}}さんのあそび</a>　＞　<a href="/article/{{$asobikata->id}}/">{{$asobikata->name}}</a> ＞　あそレポを編集する
+                <a href="/">TOP</a> ＞　あそレポを編集する
             @else
                 <a href="/">TOP</a> ＞　<a href="/user/{{$login_id}}/">{{$user_name}}さんのあそび</a>　＞　<a href="/article/{{$asobikata->id}}/">{{$asobikata->name}}</a> ＞　あそレポを投稿する
             @endif
@@ -27,30 +27,16 @@
         @if(count($errors) > 0)
             <p class="error">入力に問題があります。再入力してください。</p>
         @else
-            <link rel="stylesheet" href="/css/modai.css">
-            <div class="modal">
-                <input id="modal-trigger" class="checkbox" type="checkbox" checked="checked">
-                <div class="modal-overlay">
-                    <div align="center" class="modal-wrap">
-                        <div class="border_box">
-                            <div class="clearfix border_body">
-                                @if($ua == 'objects.common')
-                                    <img class="floatLeft" src="/img/form/main01.png">
-                                @endif
-                                @if(!isset($aso_repo))
-                                    あそレポの投稿に興味を持っていただき、</br>ありがとうございます！</br>
-                                @endif
-                                以下のルールを守って投稿してください。</br></br>
-                                <ul><li>公序良俗に反する書き込みはやめましょう。</li>
-                                <li>著作権を侵害することはやめましょう。</li>
-                                <li>その他<a href="/kiyaku/" target="_blank">利用規約</a>に反する書き込みは削除することがあります。</li></ul>
-                                </br><label for="modal-trigger"><img class="btn" src="/img/form/open.png" width="214" height="50" class="roll" /></label>
-                            </div>
-                        </div>
-                        </br><a href="/">TOPへ</a>
-                    </div>
-                </div>
-            </div>
+            @component('objects.notice_form')
+                @slot('msg')
+                    @if(!isset($aso_repo))
+                        あそレポの投稿に興味を持っていただき、</br>ありがとうございます！</br>
+                    @endif
+                @endslot
+                @slot('ua')
+                    {{$ua}}
+                @endslot
+            @endcomponent
         @endif
 
         <form action="/aso-repo" method="post" enctype="multipart/form-data">
@@ -106,14 +92,6 @@
                 <input type="image" src="/img/form/post3_btn.png" alt="送信する" align="middle" class="post_btn">
             </div>
         </form>
-
-        <h2>もしくは……</h2>
-        <div>
-            「{{$asobikata->name}}」の動画を「あそびカタチャンネル」に投稿しよう！<br>
-            <img src='/img/channel.png' style="width: 100%;">
-            <a style="margin-bottom: 30px;" href="/aso-repo/mov-create/{{$asobikata->id}}"><img src="/img/form/mov_create.png" alt="「あそびカタチャンネル」に投稿する" style="width: 100%;"></a>
-        </div>
-
 
         <script type="text/javascript">
             function adjust_frame_css(F){

@@ -45,6 +45,10 @@ class AsoRepoController extends Controller
         //ほぼ同じことがArticleController@createでも行われている
     }
 
+    public function selecter_aso_repo(Request $request, $aid){
+        return view('layouts.selecter_aso_repo', ['aid' => $aid, 'ua' => $request->ua . 'objects.common']);
+    }
+
     public function img_create(Request $request){
         return $this->is_logged_in('layouts.img_create', '/aso-repo/img-create', $request);
     }
