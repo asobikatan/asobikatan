@@ -33,14 +33,6 @@
         <input type="hidden" name="asobikata_id" value="{{$aid}}">
         <input type="hidden" name="asobikata_name" value="{{$asobikata->name}}">
 
-        <h2>題名を決めよう！</h2>
-        <div class="play_list">
-            @if($errors->has("title"))
-                <div class="error">{{$errors->first("title")}}</div>
-            @endif
-            <input type="text" name="title" style="width: 100%" value="{{old('title', '「' . $asobikata->name . '」で遊んで起きたこととは……？【あそレポ】')}}">
-        </div>
-
         <h2>動画を投稿しよう！</h2>
         <div class="play_list">
             @if(count($errors) > 0)
@@ -49,6 +41,14 @@
             @endif
             <input type="file" name="movie" accept="video/quicktime, video/mp4, video/x-msvideo, video/x-ms-wmv, video/MP2P, video/MP1S, video/x-flv, video/3gpp, video/webm, video/hevc">
             ※必須項目　※1GByteまで
+        </div>
+
+        <h2>題名を決めよう！</h2>
+        <div class="play_list">
+            @if($errors->has("title"))
+                <div class="error">{{$errors->first("title")}}</div>
+            @endif
+            <input type="text" name="title" style="width: 100%" value="{{old('title', '「' . $asobikata->name . '」で遊んで起きたこととは……？【あそレポ】')}}">
         </div>
 
         <h2>説明文を追加しよう！（任意）</h2>
