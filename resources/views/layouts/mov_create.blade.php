@@ -19,6 +19,7 @@
         {{csrf_field()}}
         <input type="hidden" name="user_id" value="{{$session_user->id}}">
         <input type="hidden" name="asobikata_id" value="{{$aid}}">
+        <input type="hidden" name="asobikata_name" value="{{$asobikata->name}}">
 
             <h2>動画を投稿しよう！</h2>
             <div>
