@@ -93,7 +93,26 @@ class AsoRepoController extends Controller
         }
 
         $this->validate($request, $validate_rule);
+
+        $title = 'あそびカタ紹介「' . $_POST['asobikata_name'] . '」';
+        $categories[] = '（自動取得したカテゴリ）';
         $tags = explode(',', $request->tags);
+        $_POST['content'] .= <<< EOF
+あそびカタン。内の解説ページはこちら！→https://asobikatan.jp/article/$asobikata_id
+
+あそびカタン。では一人でできるあそびカタも豊富に取り揃えています！
+あなたも思いついたあそびカタを投稿してみてくださいね！投稿はあそびカタン。トップページから！
+→https://asobikatan.jp/
+
+
+EOF;
+        foreach($categories as $category){
+            $tags .= ',' . $category;
+            $_POST['content'] .= <<<EOF
+
+$category
+EOF;
+        }
 
         unset($_POST['_token']);
         unset($_POST['x']);
