@@ -126,6 +126,4 @@
 
 @section('footer')
     @include('sp_objects.footer')
-    <script type="text/javascript"> adcropsjs_params={"site_id":25403,"type":"rectangle","interval":60,"rand":1}; </script>
-    <script type="text/javascript" src="https://js.adcrops.net/adcropsjs.js"></script>
 @endsection

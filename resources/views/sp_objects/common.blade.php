@@ -122,6 +122,13 @@
             object-fit: contain;
         }
 
+        .item img{
+            float: right;
+            height: 20%;
+            width: 20%;
+            object-fit: contain;
+        }
+
         .floatRight{
             float: right;
             padding: 0 0 0 5%;
