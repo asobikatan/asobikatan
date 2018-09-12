@@ -69,7 +69,7 @@
         <p style="margin: 5px;">,（半角カンマ）で区切ると複数登録できます。</p>
         <div class="play_list">
             <input type="text" name="tags" style="width: 100%" placeholder="例: アルバート・アインシュタイン 空飛ぶ豚 マッシュアップ" value="{{old('tags')}}">
-            <input type="image" src="/img/form/mov_create.png" alt="送信する" align="middle" class="post_btn" onClick='disp_loading();'>
+            <input type="image" src="/img/form/movie_aso_repo.png" alt="送信する" align="middle" class="post_btn" onClick='disp_loading();'>
         </div>
     </form>
 
