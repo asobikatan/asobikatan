@@ -10,6 +10,6 @@
     </style>
 </head>
 <body>
-    <img src="/img/aso_repo/{{$aso_repo->id}}_700.jpg" style="width: 30%">
+    <img src="/img/aso_repo/{{$aso_repo->id}}_700.jpg" style="width: 100%">
     <p>{!!nl2br($aso_repo->content)!!}</p>
 </body>
