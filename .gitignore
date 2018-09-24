@@ -15,3 +15,4 @@ yarn-error.log
 /public/img/asobi/
 /public/img/user/
 *.log
+.DS_Store

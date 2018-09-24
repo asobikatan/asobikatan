@@ -34,19 +34,29 @@ class ArticleController extends Controller
             $aso_repo_per_page = 18;
             $offset = ($page - 1) * $aso_repo_per_page;
         }
-        $count = DB::select("select count(*) as count from aso_repo where asobikata_id = :aid and status = 1", ['aid' => $aid])[0]->count;
-        $aso_repos = DB::table('aso_repo')->join('users', 'aso_repo.user_id', '=', 'users.id')->select('users.id as user_id', 'users.name as user_name', 'users.login_id as login_id', 'aso_repo.*')->where('aso_repo.asobikata_id', $aid)->where('aso_repo.status', 1)->orderBy('aso_repo.id', 'desc')->skip($offset)->take($aso_repo_per_page)->get();
+
+        //topページの新着あそレポ一覧なら$aid == top
+        if($aid == 'top'){
+            $count = DB::select("select count(id) as count from aso_repo where status = 1")[0]->count;
+            $aso_repos = DB::table('aso_repo')->join('users', 'aso_repo.user_id', '=', 'users.id')->select('users.id as user_id', 'users.name as user_name', 'users.login_id as login_id', 'aso_repo.*')->where('aso_repo.status', 1)->orderBy('aso_repo.id', 'desc')->skip($offset)->take($aso_repo_per_page)->get();
+        }else{
+            $count = DB::select("select count(*) as count from aso_repo where asobikata_id = :aid and status = 1", ['aid' => $aid])[0]->count;
+            $aso_repos = DB::table('aso_repo')->join('users', 'aso_repo.user_id', '=', 'users.id')->select('users.id as user_id', 'users.name as user_name', 'users.login_id as login_id', 'aso_repo.*')->where('aso_repo.asobikata_id', $aid)->where('aso_repo.status', 1)->orderBy('aso_repo.id', 'desc')->skip($offset)->take($aso_repo_per_page)->get();
+            $asobikata = DB::table('asobikatas')->where('id', $aid)->where('status', 1)->first();
+            $user = DB::table('users')->where('id', $asobikata->user_id)->first();
+            $param = [
+                'asobikata' => $asobikata,
+                'user' => $user
+            ];
+        }
+        $param['aso_repos'] = $aso_repos;
+        $param['count'] = $count;
+
         $pattern = ['/<img(.*)">/', '/<a(.*)">/', '/<\/a>/', '/<strong>/', '/<\/strong>/', '/<strike>/', '/<\/strike>/', '/<p>/', '/<\/p>/'];
         foreach($aso_repos as $aso_repo){
             $aso_repo->content = preg_replace($pattern, '', $aso_repo->content);
         }
-        $asobikata = DB::table('asobikatas')->where('id', $aid)->where('status', 1)->first();
-        $user = DB::table('users')->where('id', $asobikata->user_id)->first();
-        return ['aso_repos' => $aso_repos,
-            'count' => $count,
-            'asobikata' => $asobikata,
-            'user' => $user
-        ];
+        return $param;
     }
 
     /**
@@ -66,7 +76,28 @@ class ArticleController extends Controller
         $session_user_id = $request->session()->get('session_user_id');
         $session_user = DB::table('users')->where('id', $session_user_id)->first();
 
-        return view($request->ua . 'layouts.index', ['asobikatas' => $asobikatas, 'session_user' => $session_user, 'mode' => $request->mode, 'restore_id' => $request->restore_id,]); // UAに応じて表示
+        if(isset($request->page)){
+            $page = $request->page;
+            $view = $request->ua . 'layouts.list';
+            $param = [];
+        }else{
+            $page = 0;
+            $view = $request->ua . 'layouts.index';
+            $param = [
+                'asobikatas' => $asobikatas,
+                'mode' => $request->mode,
+                'restore_id' => $request->restore_id,
+            ];
+        }
+        $aso_repos = $this->aso_repo('top', $page);
+
+        $param += ['session_user' => $session_user,
+            'aso_repos' => $aso_repos['aso_repos'],
+            'count' => $aso_repos['count'],
+            'page' => $page,
+            'ua' => $request->ua . 'objects.common']; // UAに応じて表示
+
+        return view($view, $param);
 
     }
 

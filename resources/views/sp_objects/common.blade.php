@@ -215,6 +215,10 @@
             padding-top: 4px;
         }
 
+        .big-text{
+            font-size: 12pt;
+        }
+
         .aso_repo{
             width: 42%;
             display: block;
@@ -233,6 +237,16 @@
             height: 128px;
             object-fit: contain;
         }
+
+        .aso_repo_user{
+            text-align: right;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis; /* Opera9,10対応 */
+        }
+
 
         .lap{
             visibility: collapse;

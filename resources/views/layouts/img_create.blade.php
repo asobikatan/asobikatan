@@ -12,6 +12,11 @@
             height: 50px;
             margin: 0;
         }
+
+        div{
+            display: inline-block;
+        }
+
         @if($ua == 'sp_objects.common')
             .misc-btn{
                 display: inline-block;
@@ -39,6 +44,40 @@
             }
             input[type="text"]{
                 width: 42%;
+            }
+        @else
+            .file, input, button {
+              font-size: 20pt;
+              height: 39px;
+              padding: 1px 7px;
+              margin-bottom: 5px;
+              border-radius: 10px;
+              display: inline-block;
+              border: 1px solid #999;
+              background-color: rgb(179, 201, 106);
+              color: white;
+              border-radius: 10px;
+              font-family: sans-serif;
+              line-height: 39px;
+              align-items: baseline;
+            }
+
+            .file{
+                position: relative;
+            }
+
+            input[type="text"] {
+                background-color: white;
+                color: black;
+            }
+
+            .file input[type="file"] {
+              opacity: 0;
+              filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+              position: absolute;
+              right: 0;
+              top: 0;
+              cursor: pointer;
             }
         @endif
 
@@ -125,11 +164,19 @@
             <input type="file" name="pics" accept="image/png, image/jpeg, image/gif">
             <br>
         @else
-            <input type="file" style="width: 200px;" name="pics" accept="image/png, image/jpeg, image/gif">
+            <div class="file" id="file_selecter">
+                画像を選択
+                <input type="file" name="pics" accept="image/png, image/jpeg, image/gif" onchange="lighten()">
+                <script>
+                    function lighten(){
+                        document.getElementById('file_selecter').style.backgroundColor = '#9a8';
+                    }
+                </script>
+            </div>
         @endif
-        <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->" onClick='disp_loading();'>
+        <input class="misc-btn" type="submit" alt="送信する" value="->画像を投稿->" onClick='disp_loading();' style="height: 43px;">
         @if(isset($path))
-            <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 30%; float: right;">'>
+            <input id="copyTarget" type="text" value='<img src="{{$path}}" style="width: 100%;">'>
             @if($ua == 'sp_objects.common')
                 <button class="misc-btn" id="copyButton">タグをコピー</button>
             @else
@@ -138,8 +185,8 @@
         @else
             <input id="copyTarget" type="text" placeholder="ここにタグが出ます">
         @endif
-        ※10MByteまで
     </form>
+    ※10MByteまで
     @if($ua == 'sp_objects.common')
         <script>
             var button = document.getElementById('copyButton');

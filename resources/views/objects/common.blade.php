@@ -19,12 +19,12 @@
     <style>
         h2 {
             background: url(/img/list/find_icon.png) no-repeat 0 0;
+            background-position: left bottom;
             border-bottom: solid 1px #B3CA64;
             padding-left: 80px;
+            line-height: 180%;
             font-size: 35px;
             font-weight: bold;
-            line-height: 60px;
-            height: 70px;
             margin-bottom: 20px;
         }
 
@@ -117,6 +117,15 @@
         .aso_repo img:hover{
             top: 0px;
             left: 0px;
+        }
+
+        .aso_repo_user{
+            text-align: right;
+            width: 178px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis; /* Opera9,10対応 */
         }
 
         .submit{
@@ -528,6 +537,7 @@
 
         .big-text{
             width: 100%;
+            font-size: 12pt;
         }
 
         .aso_repo{

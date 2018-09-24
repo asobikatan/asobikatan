@@ -7,7 +7,8 @@
     <a class="link" href="/category/list">カテゴリから選ぶ</a>
     <h3>人気のあそびカタ。</h3>
     @include('sp_objects.list')
-    <a class="misc-btn" href="/article">もっと記事を読み込む</a>
+    <a class="misc-btn" style="margin-bottom: 10%;" href="/article">もっと記事を読み込む</a>
+    @include('objects.aso_repo_index')
 @endsection
 
 @section('footer')

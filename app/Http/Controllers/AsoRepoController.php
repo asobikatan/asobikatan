@@ -13,6 +13,8 @@ class AsoRepoController extends Controller
         //投稿フォーム
         //あなたは誰ですか？
         $session_user_id = $request->session()->get('session_user_id');
+        //試験用強制認証機能
+        //$session_user_id = 263;
         //これ大事。早まるな。idだけわかっても右ペーン出せんやろ。
         $session_user = DB::table('users')->where('id', $session_user_id)->first();
 
@@ -81,8 +83,10 @@ class AsoRepoController extends Controller
      */
     public function create(Request $request)
     {
+        $asobikata = DB::table('asobikatas')->select('name')->where('id', $request->aid)->first();
+        $param['asobikata'] = $asobikata;
         //あそレポ投稿受付画面
-        return $this->is_logged_in('layouts.aso_repo_create', '/aso-repo/create?aid=' . $request->aid, $request);
+        return $this->is_logged_in('layouts.aso_repo_create', '/aso-repo/create?aid=' . $request->aid, $request, $param);
     }
 
     /**

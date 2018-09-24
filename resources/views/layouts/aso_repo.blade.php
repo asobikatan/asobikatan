@@ -1,7 +1,7 @@
 @extends($ua)
 
 @section('title')
-    【遊んでみた】{{$asobikata->name}}【あそレポ】| 日常をちょっと楽しく。
+    【あそレポ】{{$asobikata->name}}【遊んでみた】| 日常をちょっと楽しく。
 @endsection
 
 @section('contents')
@@ -42,7 +42,7 @@
     @else
         <a class="link" href="/article/{{$asobikata->id}}">{{$asobikata->name}}へ</a>
     @endif
-    <h2>【あそレポ】〜{{$user_name}}さん編〜</h2>
+    <h2>【あそレポ】{{$asobikata->name}}【遊んでみた】</h2>
 
     <iframe
         id="content"
@@ -53,12 +53,14 @@
         class="item"
         scrolling="no"
         frameborder="0"></iframe>
+    <div class="item"></div>
 
-    <h2 style="border-top: 1px solid gray;">{{$user_name}}さん</h2>
-    <div class="item">
+    <h2>{{$user_name}}さん</h2>
+    <div>
         <img onerror="this.src='/img/noimg.jpg';" src="/img/user/{{$user_id}}_50x50.jpg"><a href="/user/{{$login_id}}/">{{$user_name}}さんのあそびカタ一覧</a><br>
         <img onerror="this.src='/img/noimg.jpg';" src="/img/social_icon01.png"><a href="http://twitter.com/{{$login_id}}" target="_blank" rel="nofollow">{{$user_name}}さんのTwitter</a>
     </div>
+    <div class="item"></div>
 
     <h2>楽しさを共有しよう！</h2>
     @if($ua == 'objects.common')
@@ -83,8 +85,12 @@
         </script>
     @endif
     <div>
-        <p>「{{$asobikata->name}}」の感想を「あそレポ」に投稿しよう！</p>
-        <a style="margin-bottom: 30px;" href="/aso-repo/create?aid={{$asobikata->id}}"><img src="/img/form/post3_btn.png" alt="あそレポに投稿する" style="width: 100%;"></a>
+        <p>「あそレポ」を投稿して「{{$asobikata->name}}」の感想を共有しよう！</p>
+        @if($ua == 'sp_objects.common')
+            <a class="misc-btn" style="margin-bottom: 10%;" href="/aso-repo/create?aid={{$asobikata->id}}">あそレポを投稿する</a>
+        @else
+            <a style="margin-bottom: 30px;" href="/aso-repo/create?aid={{$asobikata->id}}"><img src="/img/form/post3_btn.png" alt="あそレポを投稿する" style="width: 100%;"></a>
+        @endif
     </div>
 
     <script type="text/javascript">

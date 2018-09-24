@@ -12,8 +12,10 @@
             @if(isset($aso_repo))
                 <a href="/">TOP</a> ＞　あそレポを編集する
             @else
-                <a href="/">TOP</a> ＞　あそレポを投稿する
+                <a href="/">TOP</a> ＞　「{{$asobikata->name}}」のあそレポを投稿する
             @endif
+        @else
+            <h2>「{{$asobikata->name}}」のあそレポを投稿する</h2>
         @endif
 
         @if(count($errors) > 0)
@@ -44,7 +46,16 @@
                 </div>
             </div>
         @endif
-        <form action="/aso-repo" method="post" enctype="multipart/form-data">
+        <script type="text/javascript">
+            var is_note_msg=true;
+            window.onbeforeunload = function(event){
+              if(is_note_msg){
+                event = event || window.event;
+                event.returnValue = '入力中のページから移動しますか？';
+              }
+            }
+        </script>
+        <form action="/aso-repo" method="post" enctype="multipart/form-data" onSubmit="is_note_msg=false;">
             {{csrf_field()}}
             <input type="hidden" name="user_id" value="{{$session_user->id}}">
             @if(isset($aso_repo))
@@ -90,9 +101,9 @@
                     $placeholder = 'あれは去年の8月のことです。遅くまで仕事をしていて帰りが遅くなった私は、地方に住んでいたこともあり、バスの中に一人きりでした。しかし妙なんです。バスの中には私しかいないはずなのに、囁き声が聞こえてくるんです。気を紛らわしたかった私は、カバンの中から携帯電話を取り出し、あそびカタンであそびカタを探すことにしました。「車内でできる遊び」を探し、みんなで時の経つのも忘れて遊んでいました。あれ、そういえば私しかいなかったような……。';
                 @endphp
                 @if(isset($aso_repo))
-                    <textarea rows="30" name="content" class="big-text" placeholder="{{$placeholder}}">{!!old('content', $aso_repo->content)!!}</textarea>
+                    <textarea rows="20" name="content" class="big-text" placeholder="{{$placeholder}}">{!!old('content', $aso_repo->content)!!}</textarea>
                 @else
-                    <textarea rows="30" name="content" class="big-text" placeholder="{{$placeholder}}">{!!old('content')!!}</textarea>
+                    <textarea rows="20" name="content" class="big-text" placeholder="{{$placeholder}}">{!!old('content')!!}</textarea>
                 @endif
                 <input type="image" src="/img/form/post3_btn.png" alt="送信する" align="middle" class="post_btn">
             </form>

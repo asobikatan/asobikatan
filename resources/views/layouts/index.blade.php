@@ -64,6 +64,9 @@
             <a href="/article"><img onerror="this.src='/img/noimg.jpg';" src="/img/top/popular_btn.png" alt="もっと人気の遊びを見る" width="639" height="65" class="roll"></a>
         </div>
     </div>
+
+    @include('objects.aso_repo_index')
+
     <a href="/article/create"><img onerror="this.src='/img/noimg.jpg';" src="/img/detail/recruitment_btn.png" alt="あそびかたを投稿する" width="700"></a>
 @endsection
 
