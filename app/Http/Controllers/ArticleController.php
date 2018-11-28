@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 class ArticleController extends Controller
 {
     public function pop_get(){
+        /*
         $asobikata_ids = DB::select("select asobikata_id from yattemitais where insert_date > current_date - interval '30 days' group by asobikata_id order by count(asobikata_id) desc limit 20");
         $j = 0;
         for($i = 0; $i < 5; $i++){
@@ -23,7 +24,12 @@ class ArticleController extends Controller
             }
         }
         unset($asobikata_id);
+        */
 
+        $asobikata_ids = DB::table('asobikatas')->select('id')->where('asobikatas.status', 1)->orderby('id', 'desc')->take(5)->get();
+        for($i = 0; $i < 5; $i++){
+            $asobikatas[$i] = DB::table('asobikatas')->join('users', 'asobikatas.user_id', '=', 'users.id')->where('asobikatas.id', $asobikata_ids[$i]->id)->where('asobikatas.status', 1)->first(["users.name as user_name", "asobikatas.name as a_name", "users.id as uid", "asobikatas.id as id", "asobikatas.outline as outline", "asobikatas.point_1 as point_1", "asobikatas.user_id as user_id", "users.login_id as login_id", "asobikatas.number_safe_min as number_safe_min", "asobikatas.number_safe_max as number_safe_max", "asobikatas.price as price", "asobikatas.one_time as one_time", "asobikatas.place_type as place_type", "asobikatas.detail_3_4 as detail_3_4", "asobikatas.detail_3_5 as detail_3_5", "asobikatas.age_min as age_min", "asobikatas.main_pic as main_pic"]);
+        }
         return $asobikatas;
     }
     public function aso_repo($aid, $page = 0){
